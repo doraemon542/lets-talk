@@ -47,6 +47,9 @@ export const login = async (req, res) => {
       return res.status(400).json({ message: 'Invalid email or password' });
     }
 
+    // Set user online status to true
+    await User.setOnlineStatus(user._id, true);
+
     // Return success response
     res.status(200).json({ message: 'Login successful', user });
   } catch (err) {
@@ -95,6 +98,7 @@ export const submitRating = async (req, res) => {
 export const getOnlineUsers = async (req, res) => {
   try {
     const onlineUsers = await User.getOnlineUsers(); // Use the correct method
+    console.log('Online Users:', onlineUsers); // Log the result for debugging
     res.status(200).json(onlineUsers);
   } catch (err) {
     console.error('Error fetching online users:', err);

@@ -70,13 +70,15 @@ class User {
     }
   }
 
-  static async getOnlineUsers() {
-    try {
-      return await User.collection().find({ isOnline: true }).toArray();
-    } catch (err) {
-      throw err;
-    }
+ // models/User.js
+static async getOnlineUsers() {
+  try {
+    return await User.collection().find({ isOnline: true }).toArray(); // Fetch users with isOnline: true
+  } catch (err) {
+    throw err;
   }
+}
+
 }
 
 export default User;
